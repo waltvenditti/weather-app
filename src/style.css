@@ -1,0 +1,8 @@
+* {
+    caret-color: transparent;
+    border: 1px solid  black;
+}
+
+input {
+    caret-color: auto;
+}
