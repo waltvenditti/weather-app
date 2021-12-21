@@ -1,6 +1,7 @@
 import "./style.css";
-const { format } = require('date-fns');
+const { format, fromUnixTime, getUnixTime } = require('date-fns');
 const { zonedTimeToUtc } = require('date-fns-tz')
+const moment = require('moment-timezone');
 
 // write a function that takes location and returns weather object or whatever
 
@@ -67,10 +68,37 @@ btnSubmit.addEventListener("click", async () => {
   console.log(wData);
 });
 
-//getForecast("kyiv", 'imperial');
-let date = new Date()
-let fDate = format(date, 'MM-dd-yyyy hh:mmaa')
-let utcDate = zonedTimeToUtc(date);
-console.log(date);
-console.log(fDate);
-console.log(utcDate);
+
+let epochDate = 1640128449;
+
+let arf = getUnixTime(new Date());
+console.log(arf);
+
+console.log(fromUnixTime(arf));
+
+
+
+// get the time and convert it to unix
+// offset this by timezone value
+// get a string with that HH:mm value
+
+
+// const t1 = moment.tz(new Date, 'Europe/London').format('YYYY-MM-DD HH:mm:ss');
+
+/*
+const t1 = moment.tz(new Date, 'Europe/London').format('X');
+console.log(t1);
+
+function adjustForTimezone(utcTime) {
+  const tz = 7200;
+  const localTime = parseInt(utcTime)+tz;
+  return localTime;
+}
+
+function formatUnixTime(unixTime) {
+  
+}
+
+let time = adjustForTimezone(t1);
+formatUnixTime(time);
+*/
