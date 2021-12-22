@@ -1,13 +1,12 @@
 import "./style.css";
-const { format, fromUnixTime, getUnixTime } = require('date-fns');
-const { zonedTimeToUtc } = require('date-fns-tz')
-const moment = require('moment-timezone');
+const { format } = require('date-fns');
 
-// write a function that takes location and returns weather object or whatever
 
+// DOM elements
 const inputSearch = document.querySelector("#input-search");
 const btnSubmit = document.querySelector("#btn-submit");
 
+// helper functions
 function meterToFeet(meters) {
   return (meters * 3.2808).toFixed(0);
 }
@@ -16,89 +15,70 @@ function feetToMile(feet) {
   return (feet / 5280).toFixed(1);
 }
 
-async function getCurrentWeather(location, units) {
-  try {
-    const re = await fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=${location}&units=${units}&APPID=cda7acdfc26ad0b9968959a4af1eca7e`,
-      { mode: "cors" }
+// async core functions
+async function getCoords(location) {
+  const re = await fetch(
+    `http://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=cda7acdfc26ad0b9968959a4af1eca7e`, 
+    { mode: "cors"}
     );
-    const wData = await re.json();
-    return wData;
+  const data = await re.json();
+  return data.coord;
+}
+
+async function getNameAndCountry(location) {
+  const re = await fetch(
+    `http://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=cda7acdfc26ad0b9968959a4af1eca7e`, 
+    { mode: "cors"}
+    );
+    const data = await re.json();
+    const nameAndCountry = {
+      name: data.name,
+      country: data.sys.country,
+    }
+    return nameAndCountry;
+}
+
+async function getWeatherOneCall(location, units) {
+  try {
+    const coords = await getCoords(location);
+    const re = await fetch(
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${coords.lat}&lon=${coords.lon}&units=${units}&exclude=minutely,hourly&appid=cda7acdfc26ad0b9968959a4af1eca7e`
+    );
+    const data = await re.json();
+    console.log(data);
+    return data;
   } catch (error) {
+    // additional error handling
     console.log(error);
-    return false;
   }
 }
 
-async function getForecast(location, units) {
-  try {
-    const re = await fetch(
-      `http://api.openweathermap.org/data/2.5/forecast?q=${location}&units=${units}&appid=cda7acdfc26ad0b9968959a4af1eca7e`,
-      { mode: "cors" }
-    );
-    const wData = await re.json();
-    console.log(wData);
-  } catch (error) {
-    console.log(error);
-    return false;
-  }
-}
+getWeatherOneCall('murmansk', 'imperial');
 
-async function unpackWeather(location, units) {
-  const data = await getCurrentWeather(location, units);
-  console.log(data);
+// will mod this f so it receives the data externally
+async function unpackCurrent(location, units) {
+  const data = await getWeatherOneCall(location, units);
   const wData = {
-    name: data.name,
-    units: `${units}`,
-    country: data.sys.country,
-    timezone: data.timezone,
-    temp: data.main.temp.toFixed(1),
-    feels_like: data.main.feels_like,
-    desc: data.weather[0].description,
-    humidity: data.main.humidity,
-    wind: data.wind.speed.toFixed(1),
-    vis: feetToMile(meterToFeet(data.visibility)),
+    // name: data.name,
+    // units: `${units}`,
+    // country: data.sys.country,
+    temp: data.current.temp,
+    feels_like: data.current.feels_like,
+    desc: data.current.weather[0].description,
+    // humidity is always %
+    humidity: data.current.humidity,
+    // wind speed is m/s for metric, mph for imperial
+    wind: data.current.wind_speed,
+    // visibility is always in meters 
+    vis: data.current.visibility,
   };
   return wData;
 }
 
+// button event listeners 
 btnSubmit.addEventListener("click", async () => {
   const location = inputSearch.value;
-  const wData = await unpackWeather(location, 'imperial');
+  const wData = await unpackCurrent(location, 'imperial');
+  // const fData = await unpackForecast(location, 'metric');
   console.log(wData);
 });
-
-
-let epochDate = 1640128449;
-
-let arf = getUnixTime(new Date());
-console.log(arf);
-
-console.log(fromUnixTime(arf));
-
-
-
-// get the time and convert it to unix
-// offset this by timezone value
-// get a string with that HH:mm value
-
-
-// const t1 = moment.tz(new Date, 'Europe/London').format('YYYY-MM-DD HH:mm:ss');
-
-/*
-const t1 = moment.tz(new Date, 'Europe/London').format('X');
-console.log(t1);
-
-function adjustForTimezone(utcTime) {
-  const tz = 7200;
-  const localTime = parseInt(utcTime)+tz;
-  return localTime;
-}
-
-function formatUnixTime(unixTime) {
-  
-}
-
-let time = adjustForTimezone(t1);
-formatUnixTime(time);
-*/
