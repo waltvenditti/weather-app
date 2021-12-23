@@ -36,7 +36,7 @@ h2 {
     display: flex;
 }
 
-#div-pic-desc-temp {
+.div-pic-desc-temp {
     display: flex;
 }
 
@@ -45,20 +45,27 @@ p {
     margin-bottom: 4px;
 }
 
-#div-current {
-    max-width: 250px;
+.div-current {
+    max-width: 300px;
     display: flex;
     flex-direction: column;
     margin-bottom: 48px;
 }
 
 
-#div-forecast {
+.div-forecast {
     display: flex;
     justify-content: space-between;
 }
 
 .div-daily-forecast {
     display: flex;
+    max-width: 150px;
     flex-direction: column;
+}
+
+.div-daily-forecast img {
+    flex: 0;
+    height: 102px;
+    width: 102px;
 }
