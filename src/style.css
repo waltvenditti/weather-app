@@ -6,3 +6,59 @@
 input {
     caret-color: auto;
 }
+
+h2 {
+    margin-bottom: 8px;
+}
+
+#div-search {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+}
+
+#div-input-and-btn,
+#div-search button,
+#div-search p {
+    margin-right: auto;
+}
+
+#div-search p {
+    margin-bottom: 12px;
+}
+
+#div-search input {
+    max-width: 200px;
+    margin-right: 8px;
+}
+
+#div-input-and-btn {
+    display: flex;
+}
+
+#div-pic-desc-temp {
+    display: flex;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 4px;
+}
+
+#div-current {
+    max-width: 250px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 48px;
+}
+
+
+#div-forecast {
+    display: flex;
+    justify-content: space-between;
+}
+
+.div-daily-forecast {
+    display: flex;
+    flex-direction: column;
+}
