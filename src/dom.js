@@ -61,13 +61,13 @@ export function createCurrentWeatherCard(objectID, objectF, objectC) {
     pLocation.textContent = `${objectID.name}, ${objectID.country}`;
     pDate.textContent = `${format(objectF.date*1000, 'MMMM dd')}`;
     pDesc.textContent = `${returnTitleCase(objectF.desc)}`;
-    pTempF.textContent = `${objectF.temp}\xB0F`;
-    pTempC.textContent = `${objectC.temp}\xB0C`;
-    pFeelsLike.textContent = `${objectF.feels_like}\xB0F  (${objectC.feels_like}\xB0C)`;
+    pTempF.textContent = `${objectF.temp.toFixed(1)}\xB0F`;
+    pTempC.textContent = `${objectC.temp.toFixed(1)}\xB0C`;
+    pFeelsLike.textContent = `${objectF.feels_like.toFixed(1)}\xB0F  (${objectC.feels_like.toFixed(1)}\xB0C)`;
     spanFeelsLike.textContent = 'Feels like:';
     pHumidity.textContent = `${objectF.humidity}%`;
     spanHumidity.textContent = 'Humidity:';
-    pWind.textContent = `${objectF.wind} mph (${objectC.wind} m/s)`;
+    pWind.textContent = `${objectF.wind.toFixed(1)} mph (${objectC.wind.toFixed(1)} m/s)`;
     spanWind.textContent = 'Wind:'
     pVis.textContent = `${objectC.vis} meters`;
     spanVis.textContent = 'Visibility:'
