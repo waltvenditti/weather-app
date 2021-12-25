@@ -1,5 +1,4 @@
 import { handleWeatherRequests} from "./functions.js";
-import testImage from './10d@2x.png';
 import { doc } from 'prettier';
 
 const { format } = require('date-fns');

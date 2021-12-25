@@ -1,9 +1,10 @@
 import "./style.css";
 import { handleWeatherRequests} from "./functions.js";
-import { createCurrentWeatherCard, deleteCurrentWeatherCard, deleteAllForecastCards, createForecastCard, createForecast } from './dom.js';
+import { createCurrentWeatherCard, deleteAllForecastCards, createForecast } from './dom.js';
 
 (async () => {
   const input = document.querySelector('#input-search');
+  console.log("Calling London");
   const data = await handleWeatherRequests('london');
   console.log("heard back from London");
   input.value = '';
