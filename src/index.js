@@ -5,6 +5,7 @@ import { createCurrentWeatherCard, deleteCurrentWeatherCard, deleteAllForecastCa
 (async () => {
   const input = document.querySelector('#input-search');
   const data = await handleWeatherRequests('london');
+  console.log("heard back from London");
   input.value = '';
   createCurrentWeatherCard(data[0], data[1], data[2]);
   deleteAllForecastCards();
