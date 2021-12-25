@@ -1,5 +1,5 @@
-import { handleWeatherRequests} from "./functions.js";
 import { doc } from 'prettier';
+import { handleWeatherRequests} from "./functions.js";
 
 const { format } = require('date-fns');
 
@@ -11,10 +11,10 @@ const btnSubmit = document.querySelector('#btn-submit');
 // Helper Functions
 function returnTitleCase(string) {
   const wordArray = string.split(' ');
-  let newArray = [];
+  const newArray = [];
   for (let i = 0; i < wordArray.length; i++) {
-    let word = wordArray[i];
-    let newWord = word.charAt(0).toUpperCase() + word.slice(1);
+    const word = wordArray[i];
+    const newWord = word.charAt(0).toUpperCase() + word.slice(1);
     newArray.push(newWord);
   }
   return(newArray.join(' '));
@@ -171,6 +171,21 @@ export function deleteAllForecastCards() {
   const divMaster = document.querySelector('#div-forecast-master')
   const divForecast = document.querySelector('.div-forecast');
   divMaster.removeChild(divForecast);
+}
+
+export async function constructInitialHtml() {
+  const input = document.querySelector('#input-search');
+  console.log("Calling London");
+  const data = await handleWeatherRequests('london');
+  console.log("heard back from London");
+  input.value = '';
+  createCurrentWeatherCard(data[0], data[1], data[2]);
+  deleteAllForecastCards();
+  const divForecast = document.createElement('div');
+  divForecast.classList.add('div-forecast');
+  const divForecastMaster = document.querySelector('#div-forecast-master');
+  divForecastMaster.appendChild(divForecast);
+  createForecast(data[3], data[4]);
 }
 
 // button event listeners 
