@@ -55,7 +55,7 @@ export function createCurrentWeatherCard(objectID, objectF, objectC) {
     divPicDescTemp.classList.add('div-pic-desc-temp');
     divCurrentWeather.classList.add('div-current-weather');
     divOtherWeather.classList.add('div-other-weather');
-    imgCurrent.src = `http://openweathermap.org/img/wn/${objectF.icon}@2x.png`;
+    imgCurrent.src = `https://openweathermap.org/img/wn/${objectF.icon}@2x.png`;
 
     // text content and styles
     pLocation.textContent = `${objectID.name}, ${objectID.country}`;
@@ -125,7 +125,7 @@ export function createForecastCard(objectF, objectC, idNum) {
   // assign id's, classes, and img src
   divDailyForecast.setAttribute('id', `df${idNum}`);
   divDailyForecast.classList.add('div-daily-forecast');
-  imgForecast.src = `http://openweathermap.org/img/wn/${objectF.icon}@2x.png`;
+  imgForecast.src = `https://openweathermap.org/img/wn/${objectF.icon}@2x.png`;
 
   // text content
   if (idNum === 0) {

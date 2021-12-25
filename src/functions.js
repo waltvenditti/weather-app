@@ -10,7 +10,7 @@ function feetToMile(feet) {
 // async core functions
 export async function getCoords(location) {
   const re = await fetch(
-    `http://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=cda7acdfc26ad0b9968959a4af1eca7e`,
+    `https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=cda7acdfc26ad0b9968959a4af1eca7e`,
     { mode: "cors" }
   );
   const data = await re.json();
@@ -32,7 +32,7 @@ export async function getWeatherOneCall(lat, lon, units) {
 
 export async function getNameAndCountry(location) {
   const re = await fetch(
-    `http://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=cda7acdfc26ad0b9968959a4af1eca7e`,
+    `https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=cda7acdfc26ad0b9968959a4af1eca7e`,
     { mode: "cors" }
   );
   const data = await re.json();
