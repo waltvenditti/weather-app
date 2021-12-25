@@ -3,9 +3,9 @@ import { handleWeatherRequests} from "./functions.js";
 import { createCurrentWeatherCard, deleteCurrentWeatherCard, deleteAllForecastCards, createForecastCard, createForecast } from './dom.js';
 
 (async () => {
-  let data = await handleWeatherRequests('lviv');
-  console.log(data);
-  // deleteCurrentWeatherCard();
+  const input = document.querySelector('#input-search');
+  const data = await handleWeatherRequests('london');
+  input.value = '';
   createCurrentWeatherCard(data[0], data[1], data[2]);
   deleteAllForecastCards();
   const divForecast = document.createElement('div');

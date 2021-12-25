@@ -1,10 +1,32 @@
 * {
     caret-color: transparent;
-    border: 1px solid  black;
+    font-family: sans-serif;
+}
+
+html {
+    height: 100%;
+    background-color: lightsteelblue;
+}
+
+body {
+    height: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 24px;
+    padding-right: 24px;
+    background-color: white;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 input {
     caret-color: auto;
+}
+
+h1 {
+    margin-top: 0;
+    font-size: 48px;
 }
 
 h2 {
@@ -46,10 +68,23 @@ p {
 }
 
 .div-current {
+    background-color: snow;
+    border: 2px solid black;
+    border-radius: 6px;
+    padding: 2px;
     max-width: 300px;
     display: flex;
     flex-direction: column;
     margin-bottom: 48px;
+}
+
+.div-current p {
+    padding-left: 4px;
+
+}
+
+.div-current p:first-child {
+    padding-top: 6px;
 }
 
 
@@ -59,13 +94,30 @@ p {
 }
 
 .div-daily-forecast {
+    background-color: ghostwhite;
+    padding: 2px;
+    border: 2px solid black;
+    border-radius: 6px;
     display: flex;
     max-width: 150px;
     flex-direction: column;
+
+}
+
+.div-daily-forecast p {
+    padding-left: 4px;
+    padding-bottom: 4px;
+    text-align: center;
+}
+
+.div-daily-forecast p:first-child {
+    padding-top: 6px;
 }
 
 .div-daily-forecast img {
     flex: 0;
     height: 102px;
     width: 102px;
+    margin-left: auto;
+    margin-right: auto;
 }
